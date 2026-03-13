@@ -48,11 +48,15 @@ export class Selectors implements api.Selectors {
     this._testIdAttributeName = attributeName;
     setTestIdAttribute(attributeName);
     for (const context of this._contextsForSelectors)
-      context._channel.setTestIdAttributeName({ testIdAttributeName: Array.isArray(attributeName) ? attributeName : [attributeName] }).catch(() => {});
+      context._channel.setTestIdAttributeName({ testIdAttributeName: this._normalizeTestIdAttributeName(attributeName) }).catch(() => {});
+  }
+
+  private _normalizeTestIdAttributeName(attributeName: string | string[]): string[] {
+    return Array.isArray(attributeName) ? attributeName : [attributeName];
   }
 
   _withSelectorOptions<T>(options: T) {
-    const testIdAttributeName = this._testIdAttributeName !== undefined ? (Array.isArray(this._testIdAttributeName) ? this._testIdAttributeName : [this._testIdAttributeName]) : undefined;
+    const testIdAttributeName = this._testIdAttributeName !== undefined ? this._normalizeTestIdAttributeName(this._testIdAttributeName) : undefined;
     return { ...options, selectorEngines: this._selectorEngines, testIdAttributeName };
   }
 }

@@ -92,11 +92,12 @@ export const test = contextTest.extend<CLITestArgs>({
   openRecorder: async ({ context, recorderPageGetter }, use) => {
     await use(async options => {
       const { testIdAttributeName, ...rest } = options || {};
+      const normalizedTestIdAttributeName = testIdAttributeName === undefined ? undefined : (Array.isArray(testIdAttributeName) ? testIdAttributeName : [testIdAttributeName]);
       await (context as any)._enableRecorder({
         mode: 'recording',
         omitCallTracking: true,
-        ...(testIdAttributeName !== undefined ? { testIdAttributeName: Array.isArray(testIdAttributeName) ? testIdAttributeName : [testIdAttributeName] } : {}),
-        ...rest
+        ...rest,
+        ...(normalizedTestIdAttributeName !== undefined && { testIdAttributeName: normalizedTestIdAttributeName }),
       });
       const page = await context.newPage();
       return { page, recorder: new Recorder(page, await recorderPageGetter()) };
