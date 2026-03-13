@@ -252,6 +252,21 @@ export default defineConfig({
 });
 ```
 
+## property: TestOptions.forceShadowOpen = %%-context-option-force-shadow-open-%%
+* since: v1.51
+
+**Usage**
+
+```js title="playwright.config.ts"
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  use: {
+    forceShadowOpen: true
+  },
+});
+```
+
 ## property: TestOptions.geolocation = %%-context-option-geolocation-%%
 * since: v1.10
 

@@ -272,6 +272,7 @@ export interface PlaywrightTestOptions {
   clientCertificates: ClientCertificate[] | undefined;
   deviceScaleFactor: number | undefined;
   extraHTTPHeaders: ExtraHTTPHeaders | undefined;
+  forceShadowOpen: boolean;
   geolocation: Geolocation | undefined;
   hasTouch: boolean;
   httpCredentials: HTTPCredentials | undefined;

@@ -7128,6 +7128,25 @@ export interface PlaywrightTestOptions {
    */
   extraHTTPHeaders: ExtraHTTPHeaders | undefined;
   /**
+   * If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside closed
+   * shadow DOM roots. Defaults to `false`.
+   *
+   * **Usage**
+   *
+   * ```js
+   * // playwright.config.ts
+   * import { defineConfig } from '@playwright/test';
+   *
+   * export default defineConfig({
+   *   use: {
+   *     forceShadowOpen: true
+   *   },
+   * });
+   * ```
+   *
+   */
+  forceShadowOpen: boolean;
+  /**
    * **Usage**
    *
    * ```js
