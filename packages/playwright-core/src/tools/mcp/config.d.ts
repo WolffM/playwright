@@ -187,9 +187,9 @@ export type Config = {
   };
 
   /**
-   * Specify the attribute to use for test ids, defaults to "data-testid".
+   * Specify the attribute to use for test ids, defaults to "data-testid". Multiple attributes can be specified as an array.
    */
-  testIdAttribute?: string;
+  testIdAttribute?: string | string[];
 
   timeouts?: {
     /*

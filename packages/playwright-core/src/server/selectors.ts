@@ -25,9 +25,9 @@ export class Selectors {
   private readonly _builtinEnginesInMainWorld: Set<string>;
   readonly _engines: Map<string, channels.SelectorEngine>;
   readonly guid = `selectors@${createGuid()}`;
-  private _testIdAttributeName: string;
+  private _testIdAttributeName: string | string[];
 
-  constructor(engines: channels.SelectorEngine[], testIdAttributeName: string | undefined) {
+  constructor(engines: channels.SelectorEngine[], testIdAttributeName: string[] | undefined) {
     // Note: keep in sync with InjectedScript class.
     this._builtinEngines = new Set([
       'css', 'css:light',
@@ -66,11 +66,11 @@ export class Selectors {
     this._engines.set(engine.name, engine);
   }
 
-  testIdAttributeName(): string {
+  testIdAttributeName(): string | string[] {
     return this._testIdAttributeName;
   }
 
-  setTestIdAttributeName(testIdAttributeName: string) {
+  setTestIdAttributeName(testIdAttributeName: string[]) {
     this._testIdAttributeName = testIdAttributeName;
   }
 

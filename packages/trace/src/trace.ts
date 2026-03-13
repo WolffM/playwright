@@ -44,7 +44,7 @@ export type ContextCreatedTraceEvent = {
   title?: string,
   options: BrowserContextEventOptions,
   sdkLanguage?: Language,
-  testIdAttributeName?: string,
+  testIdAttributeName?: string | string[],
   contextId?: string,
   testTimeout?: number,
 };

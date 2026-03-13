@@ -26,7 +26,7 @@ import type { Platform } from './platform';
 export class Selectors implements api.Selectors {
   private _platform: Platform;
   private _selectorEngines: channels.SelectorEngine[] = [];
-  private _testIdAttributeName: string | undefined;
+  private _testIdAttributeName: string | string[] | undefined;
   readonly _contextsForSelectors = new Set<BrowserContext>();
 
   constructor(platform: Platform) {
@@ -44,14 +44,15 @@ export class Selectors implements api.Selectors {
     this._selectorEngines.push(selectorEngine);
   }
 
-  setTestIdAttribute(attributeName: string) {
+  setTestIdAttribute(attributeName: string | string[]) {
     this._testIdAttributeName = attributeName;
     setTestIdAttribute(attributeName);
     for (const context of this._contextsForSelectors)
-      context._channel.setTestIdAttributeName({ testIdAttributeName: attributeName }).catch(() => {});
+      context._channel.setTestIdAttributeName({ testIdAttributeName: Array.isArray(attributeName) ? attributeName : [attributeName] }).catch(() => {});
   }
 
   _withSelectorOptions<T>(options: T) {
-    return { ...options, selectorEngines: this._selectorEngines, testIdAttributeName: this._testIdAttributeName };
+    const testIdAttributeName = this._testIdAttributeName !== undefined ? (Array.isArray(this._testIdAttributeName) ? this._testIdAttributeName : [this._testIdAttributeName]) : undefined;
+    return { ...options, selectorEngines: this._selectorEngines, testIdAttributeName };
   }
 }

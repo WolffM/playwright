@@ -607,7 +607,9 @@ ContextOptions:
     selectorEngines:
       type: array?
       items: SelectorEngine
-    testIdAttributeName: string?
+    testIdAttributeName:
+      type: array?
+      items: string
 
 LocalUtils:
   type: interface
@@ -877,7 +879,9 @@ DebugController:
             - inspecting
             - recording
             - none
-        testIdAttributeName: string?
+        testIdAttributeName:
+          type: array?
+          items: string
         generateAutoExpect: boolean?
 
     highlight:
@@ -1286,7 +1290,9 @@ BrowserContext:
     setTestIdAttributeName:
       internal: true
       parameters:
-        testIdAttributeName: string
+        testIdAttributeName:
+          type: array
+          items: string
 
     setExtraHTTPHeaders:
       title: Set extra HTTP headers
@@ -1396,7 +1402,9 @@ BrowserContext:
           - default
           - api
         pauseOnNextStatement: boolean?
-        testIdAttributeName: string?
+        testIdAttributeName:
+          type: array?
+          items: string
         launchOptions: json?
         contextOptions: json?
         device: string?
@@ -4040,7 +4048,9 @@ Electron:
         selectorEngines:
           type: array?
           items: SelectorEngine
-        testIdAttributeName: string?
+        testIdAttributeName:
+          type: array?
+          items: string
 
       returns:
         electronApplication: ElectronApplication

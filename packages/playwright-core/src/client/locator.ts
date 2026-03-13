@@ -464,12 +464,12 @@ export class FrameLocator implements api.FrameLocator {
   }
 }
 
-let _testIdAttributeName: string = 'data-testid';
+let _testIdAttributeName: string | string[] = 'data-testid';
 
-export function testIdAttributeName(): string {
+export function testIdAttributeName(): string | string[] {
   return _testIdAttributeName;
 }
 
-export function setTestIdAttribute(attributeName: string) {
+export function setTestIdAttribute(attributeName: string | string[]) {
   _testIdAttributeName = attributeName;
 }

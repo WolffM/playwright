@@ -74,7 +74,7 @@ export class DebugController extends SdkObject {
     }
   }
 
-  async setRecorderMode(progress: Progress, params: { mode: Mode, testIdAttributeName?: string, generateAutoExpect?: boolean }) {
+  async setRecorderMode(progress: Progress, params: { mode: Mode, testIdAttributeName?: string[], generateAutoExpect?: boolean }) {
     await progress.race(this._closeBrowsersWithoutPages());
     this._generateAutoExpect = !!params.generateAutoExpect;
 

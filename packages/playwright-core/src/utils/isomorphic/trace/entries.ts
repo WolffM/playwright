@@ -30,7 +30,7 @@ export type ContextEntry = {
   playwrightVersion?: string;
   wallTime: number;
   sdkLanguage?: Language;
-  testIdAttributeName?: string;
+  testIdAttributeName?: string | string[];
   title?: string;
   options: trace.BrowserContextEventOptions;
   pages: PageEntry[];

@@ -7544,6 +7544,10 @@ export interface PlaywrightTestOptions {
    * [page.getByTestId(testId)](https://playwright.dev/docs/api/class-page#page-get-by-test-id). `data-testid` is used
    * by default.
    *
+   * You can also specify multiple attributes to be used as test ids, and
+   * [page.getByTestId(testId)](https://playwright.dev/docs/api/class-page#page-get-by-test-id) will match any element
+   * having any of the specified attributes.
+   *
    * **Usage**
    *
    * ```js
@@ -7557,8 +7561,19 @@ export interface PlaywrightTestOptions {
    * });
    * ```
    *
+   * ```js
+   * // playwright.config.ts
+   * import { defineConfig } from '@playwright/test';
+   *
+   * export default defineConfig({
+   *   use: {
+   *     testIdAttribute: ['data-testid', 'pw-test-id'],
+   *   },
+   * });
+   * ```
+   *
    */
-  testIdAttribute: string;
+  testIdAttribute: string | string[];
 }
 
 
