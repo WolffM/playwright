@@ -851,6 +851,12 @@ on selectors that imply single target DOM element will throw when more than one 
 This option does not affect any Locator APIs (Locators are always strict). Defaults to `false`.
 See [Locator] to learn more about the strict mode.
 
+## context-option-force-shadow-open
+- `forceShadowOpen` <[boolean]>
+
+If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside
+closed shadow DOM roots. Defaults to `false`.
+
 ## context-option-service-worker-policy
 - `serviceWorkers` <[ServiceWorkerPolicy]<"allow"|"block">>
 
@@ -1058,6 +1064,7 @@ between the same pixel in compared images, between zero (strict) and one (lax), 
 - %%-context-option-recordvideo-dir-%%
 - %%-context-option-recordvideo-size-%%
 - %%-context-option-strict-%%
+- %%-context-option-force-shadow-open-%%
 - %%-context-option-service-worker-policy-%%
 
 ## browser-option-args

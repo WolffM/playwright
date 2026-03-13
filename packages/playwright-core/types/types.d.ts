@@ -10014,6 +10014,12 @@ export interface Browser {
      */
     forcedColors?: null|"active"|"none";
 
+    /**
+     * If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside closed
+     * shadow DOM roots. Defaults to `false`.
+     */
+    forceShadowOpen?: boolean;
+
     geolocation?: {
       /**
        * Latitude between -90 and 90.
@@ -15270,6 +15276,12 @@ export interface BrowserType<Unused = {}> {
      */
     forcedColors?: null|"active"|"none";
 
+    /**
+     * If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside closed
+     * shadow DOM roots. Defaults to `false`.
+     */
+    forceShadowOpen?: boolean;
+
     geolocation?: {
       /**
        * Latitude between -90 and 90.
@@ -17124,6 +17136,12 @@ export interface AndroidDevice {
      * Passing `null` resets emulation to system defaults. Defaults to `'none'`.
      */
     forcedColors?: null|"active"|"none";
+
+    /**
+     * If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside closed
+     * shadow DOM roots. Defaults to `false`.
+     */
+    forceShadowOpen?: boolean;
 
     geolocation?: {
       /**
@@ -22817,6 +22835,12 @@ export interface BrowserContextOptions {
    * Passing `null` resets emulation to system defaults. Defaults to `'none'`.
    */
   forcedColors?: null|"active"|"none";
+
+  /**
+   * If set to true, forces all shadow roots to be open, allowing inspection and interaction with elements inside closed
+   * shadow DOM roots. Defaults to `false`.
+   */
+  forceShadowOpen?: boolean;
 
   geolocation?: Geolocation;
 
