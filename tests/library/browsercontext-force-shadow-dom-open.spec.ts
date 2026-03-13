@@ -60,7 +60,7 @@ it.describe('forceShadowDOMOpen', () => {
     await expect(page.locator('#host >> span')).toHaveText('shadow content');
   });
 
-  it('should work in new pages opened in the context', async ({ context, server }) => {
+  it('should work in new pages opened in the context', async ({ context }) => {
     const page1 = await context.newPage();
     const page2 = await context.newPage();
     for (const page of [page1, page2]) {
