@@ -7559,6 +7559,27 @@ export interface PlaywrightTestOptions {
    *
    */
   testIdAttribute: string;
+  /**
+   * When true, Playwright will patch
+   * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
+   * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
+   * closed shadow DOM trees. Defaults to `false`.
+   *
+   * **Usage**
+   *
+   * ```js
+   * // playwright.config.ts
+   * import { defineConfig } from '@playwright/test';
+   *
+   * export default defineConfig({
+   *   use: {
+   *     forceShadowDOMOpen: true,
+   *   },
+   * });
+   * ```
+   *
+   */
+  forceShadowDOMOpen: boolean;
 }
 
 

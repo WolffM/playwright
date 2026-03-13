@@ -10014,6 +10014,14 @@ export interface Browser {
      */
     forcedColors?: null|"active"|"none";
 
+    /**
+     * When true, Playwright will patch
+     * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
+     * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
+     * closed shadow DOM trees. Defaults to `false`.
+     */
+    forceShadowDOMOpen?: boolean;
+
     geolocation?: {
       /**
        * Latitude between -90 and 90.
@@ -15270,6 +15278,14 @@ export interface BrowserType<Unused = {}> {
      */
     forcedColors?: null|"active"|"none";
 
+    /**
+     * When true, Playwright will patch
+     * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
+     * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
+     * closed shadow DOM trees. Defaults to `false`.
+     */
+    forceShadowDOMOpen?: boolean;
+
     geolocation?: {
       /**
        * Latitude between -90 and 90.
@@ -17124,6 +17140,14 @@ export interface AndroidDevice {
      * Passing `null` resets emulation to system defaults. Defaults to `'none'`.
      */
     forcedColors?: null|"active"|"none";
+
+    /**
+     * When true, Playwright will patch
+     * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
+     * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
+     * closed shadow DOM trees. Defaults to `false`.
+     */
+    forceShadowDOMOpen?: boolean;
 
     geolocation?: {
       /**
@@ -22817,6 +22841,14 @@ export interface BrowserContextOptions {
    * Passing `null` resets emulation to system defaults. Defaults to `'none'`.
    */
   forcedColors?: null|"active"|"none";
+
+  /**
+   * When true, Playwright will patch
+   * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
+   * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
+   * closed shadow DOM trees. Defaults to `false`.
+   */
+  forceShadowDOMOpen?: boolean;
 
   geolocation?: Geolocation;
 
