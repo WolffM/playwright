@@ -172,7 +172,7 @@ export abstract class BrowserContext<EM extends EventMap = EventMap> extends Sdk
       await this.addInitScript(`\n(() => {
   const __attachShadow = Element.prototype.attachShadow;
   Element.prototype.attachShadow = function attachShadow(init) {
-    return __attachShadow.call(this, { mode: 'open', ...(init || {}) });
+    return __attachShadow.call(this, init && init.mode === 'closed' ? { ...init, mode: 'open' } : init);
   };
 })();\n`);
     }
