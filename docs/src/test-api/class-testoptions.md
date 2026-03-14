@@ -679,7 +679,7 @@ export default defineConfig({
 ```
 
 ## property: TestOptions.forceShadowDOMOpen = %%-context-option-forceshadowdomopen-%%
-* since: v1.59
+* since: vX.XX
 
 **Usage**
 

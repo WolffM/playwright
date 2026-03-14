@@ -7565,6 +7565,9 @@ export interface PlaywrightTestOptions {
    * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
    * closed shadow DOM trees. Defaults to `false`.
    *
+   * **NOTE** This option only affects shadow roots attached after the init script runs. Shadow roots created by inline
+   * scripts that execute before Playwright's init script will remain closed.
+   *
    * **Usage**
    *
    * ```js

@@ -10019,6 +10019,10 @@ export interface Browser {
      * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
      * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
      * closed shadow DOM trees. Defaults to `false`.
+     *
+     * **NOTE** This option only affects shadow roots attached after the init script runs. Shadow roots created by inline
+     * scripts that execute before Playwright's init script will remain closed.
+     *
      */
     forceShadowDOMOpen?: boolean;
 
@@ -15283,6 +15287,10 @@ export interface BrowserType<Unused = {}> {
      * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
      * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
      * closed shadow DOM trees. Defaults to `false`.
+     *
+     * **NOTE** This option only affects shadow roots attached after the init script runs. Shadow roots created by inline
+     * scripts that execute before Playwright's init script will remain closed.
+     *
      */
     forceShadowDOMOpen?: boolean;
 
@@ -17146,6 +17154,10 @@ export interface AndroidDevice {
      * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
      * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
      * closed shadow DOM trees. Defaults to `false`.
+     *
+     * **NOTE** This option only affects shadow roots attached after the init script runs. Shadow roots created by inline
+     * scripts that execute before Playwright's init script will remain closed.
+     *
      */
     forceShadowDOMOpen?: boolean;
 
@@ -22847,6 +22859,10 @@ export interface BrowserContextOptions {
    * [`Element.prototype.attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) to force
    * all shadow DOM roots to be created with `mode: 'open'`. This allows Playwright to interact with elements inside
    * closed shadow DOM trees. Defaults to `false`.
+   *
+   * **NOTE** This option only affects shadow roots attached after the init script runs. Shadow roots created by inline
+   * scripts that execute before Playwright's init script will remain closed.
+   *
    */
   forceShadowDOMOpen?: boolean;
 
