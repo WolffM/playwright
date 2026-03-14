@@ -108,7 +108,10 @@ function shiftParams(template: string, sub: number) {
 }
 
 function transform(template: string, params: TemplateParams, testIdAttributeName: string | string[]): string {
-  const firstTestIdAttributeName = Array.isArray(testIdAttributeName) ? testIdAttributeName[0] : testIdAttributeName;
+  const attributeNames = Array.isArray(testIdAttributeName) ? testIdAttributeName : [testIdAttributeName];
+  if (!attributeNames.length)
+    throw new Error('testIdAttribute must not be empty');
+  const [firstTestIdAttributeName, ...restTestIdAttributeNames] = attributeNames;
   // Recursively handle filter(has=, hasnot=, sethas(), sethasnot()).
   // TODO: handle and(locator), or(locator), locator(locator), locator(has=, hasnot=, sethas(), sethasnot()).
   while (true) {
@@ -166,7 +169,12 @@ function transform(template: string, params: TemplateParams, testIdAttributeName
       .replace(/getbyrole\(([^)]+)\)/g, 'internal:role=$1')
       .replace(/getbytext\(([^)]+)\)/g, 'internal:text=$1')
       .replace(/getbylabel\(([^)]+)\)/g, 'internal:label=$1')
-      .replace(/getbytestid\(([^)]+)\)/g, `internal:testid=[${firstTestIdAttributeName}=$1]`)
+      .replace(/getbytestid\(([^)]+)\)/g, (_, value) => {
+        let selector = `internal:testid=[${firstTestIdAttributeName}=${value}]`;
+        for (const attr of restTestIdAttributeNames)
+          selector += ` >> internal:or=${JSON.stringify(`internal:testid=[${attr}=${value}]`)}`;
+        return selector;
+      })
       .replace(/getby(placeholder|alt|title)(?:text)?\(([^)]+)\)/g, 'internal:attr=[$1=$2]')
       .replace(/first(\(\))?/g, 'nth=0')
       .replace(/last(\(\))?/g, 'nth=-1')
