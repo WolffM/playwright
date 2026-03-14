@@ -7557,8 +7557,21 @@ export interface PlaywrightTestOptions {
    * });
    * ```
    *
+   * Multiple attributes can be specified to allow matching by any of them:
+   *
+   * ```js
+   * // playwright.config.ts
+   * import { defineConfig } from '@playwright/test';
+   *
+   * export default defineConfig({
+   *   use: {
+   *     testIdAttribute: ['data-testid', 'data-pw'],
+   *   },
+   * });
+   * ```
+   *
    */
-  testIdAttribute: string;
+  testIdAttribute: string | string[];
 }
 
 

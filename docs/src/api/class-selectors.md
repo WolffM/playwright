@@ -245,6 +245,6 @@ Defines custom attribute name to be used in [`method: Page.getByTestId`]. `data-
 
 ### param: Selectors.setTestIdAttribute.attributeName
 * since: v1.27
-- `attributeName` <[string]>
+- `attributeName` <[string]|[Array]<[string]>>
 
-Test id attribute name.
+Test id attribute name or a list of attribute names to support.

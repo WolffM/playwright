@@ -32,7 +32,14 @@ function getByAttributeTextSelector(attrName: string, text: string | RegExp, opt
   return `internal:attr=[${attrName}=${escapeForAttributeSelector(text, options?.exact || false)}]`;
 }
 
-export function getByTestIdSelector(testIdAttributeName: string, testId: string | RegExp): string {
+export function getByTestIdSelector(testIdAttributeName: string | string[], testId: string | RegExp): string {
+  if (Array.isArray(testIdAttributeName)) {
+    const selectors = testIdAttributeName.map(attr => `internal:testid=[${attr}=${escapeForAttributeSelector(testId, true)}]`);
+    let result = selectors[0];
+    for (let i = 1; i < selectors.length; i++)
+      result += ` >> internal:or=${JSON.stringify(selectors[i])}`;
+    return result;
+  }
   return `internal:testid=[${testIdAttributeName}=${escapeForAttributeSelector(testId, true)}]`;
 }
 

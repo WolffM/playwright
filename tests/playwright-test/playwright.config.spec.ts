@@ -206,3 +206,26 @@ test('should respect testIdAttribute', async ({ runInlineTest }) => {
   expect(result.exitCode).toBe(0);
   expect(result.passed).toBe(1);
 });
+
+test('should respect testIdAttribute as array', async ({ runInlineTest }) => {
+  const result = await runInlineTest({
+    'playwright.config.ts': `
+      module.exports = {
+        use: {
+          testIdAttribute: ['data-testid', 'data-pw'],
+        }
+      };
+    `,
+    'a.test.ts': `
+      import { test, expect } from '@playwright/test';
+      test('pass', async ({ page }) => {
+        await page.setContent('<div data-testid="id1">First</div><div data-pw="id2">Second</div>');
+        await expect(page.getByTestId('id1')).toHaveCount(1);
+        await expect(page.getByTestId('id2')).toHaveCount(1);
+      });
+    `,
+  }, { workers: 1 });
+
+  expect(result.exitCode).toBe(0);
+  expect(result.passed).toBe(1);
+});
