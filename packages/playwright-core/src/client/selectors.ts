@@ -26,7 +26,7 @@ import type { Platform } from './platform';
 export class Selectors implements api.Selectors {
   private _platform: Platform;
   private _selectorEngines: channels.SelectorEngine[] = [];
-  private _testIdAttributeName: string | undefined;
+  private _testIdAttributeName: string | string[] | undefined;
   readonly _contextsForSelectors = new Set<BrowserContext>();
 
   constructor(platform: Platform) {
@@ -44,14 +44,21 @@ export class Selectors implements api.Selectors {
     this._selectorEngines.push(selectorEngine);
   }
 
-  setTestIdAttribute(attributeName: string) {
+  setTestIdAttribute(attributeName: string | string[]) {
     this._testIdAttributeName = attributeName;
     setTestIdAttribute(attributeName);
+    // The server uses testIdAttributeName for codegen/recorder only (not for selector evaluation).
+    // When an array is provided, send only the primary (first) attribute to the server.
+    const testIdAttributeName = Array.isArray(attributeName) ? attributeName[0] : attributeName;
     for (const context of this._contextsForSelectors)
-      context._channel.setTestIdAttributeName({ testIdAttributeName: attributeName }).catch(() => {});
+      context._channel.setTestIdAttributeName({ testIdAttributeName }).catch(() => {});
   }
 
   _withSelectorOptions<T>(options: T) {
-    return { ...options, selectorEngines: this._selectorEngines, testIdAttributeName: this._testIdAttributeName };
+    return { ...options, selectorEngines: this._selectorEngines, testIdAttributeName: this._primaryTestIdAttributeName() };
+  }
+
+  private _primaryTestIdAttributeName(): string | undefined {
+    return Array.isArray(this._testIdAttributeName) ? this._testIdAttributeName[0] : this._testIdAttributeName;
   }
 }
