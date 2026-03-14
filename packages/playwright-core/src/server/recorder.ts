@@ -561,7 +561,7 @@ export class Recorder extends EventEmitter<RecorderEventMap> implements Instrume
     };
   }
 
-  private _testIdAttributeName(): string {
+  private _testIdAttributeName(): string | string[] {
     return this._params.testIdAttributeName || this._context.selectors().testIdAttributeName() || 'data-testid';
   }
 

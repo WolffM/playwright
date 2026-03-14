@@ -67,7 +67,7 @@ export type CLIOptions = {
   sharedBrowserContext?: boolean;
   snapshotMode?: 'incremental' | 'full' | 'none';
   storageState?: string;
-  testIdAttribute?: string;
+  testIdAttribute?: string | string[];
   timeoutAction?: number;
   timeoutNavigation?: number;
   userAgent?: string;

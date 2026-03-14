@@ -586,6 +586,12 @@ it('parseLocator options', async () => {
   expect.soft(parseLocator('javascript', `getByRole('checkbox', { checked:false, includeHidden: true })`, '')).toBe(`internal:role=checkbox[checked=false][include-hidden=true]`);
 });
 
+it('parseLocator with multiple testIdAttributeNames generates OR-chained selector', async () => {
+  expect.soft(parseLocator('javascript', `getByTestId('foo')`, ['data-a', 'data-b'])).toBe(`internal:testid=[data-a="foo"s] >> internal:or="internal:testid=[data-b=\\"foo\\"s]"`);
+  expect.soft(parseLocator('javascript', `getByTestId('foo')`, ['data-a', 'data-b', 'data-c'])).toBe(`internal:testid=[data-a="foo"s] >> internal:or="internal:testid=[data-b=\\"foo\\"s]" >> internal:or="internal:testid=[data-c=\\"foo\\"s]"`);
+  expect.soft(parseLocator('javascript', `getByTestId('foo')`, ['data-a'])).toBe(`internal:testid=[data-a="foo"s]`);
+});
+
 it('parse locators strictly', () => {
   const selector = 'div >> internal:has-text=\"Goodbye world\"i >> span';
 

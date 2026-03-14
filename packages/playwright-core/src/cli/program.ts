@@ -576,7 +576,7 @@ async function codegen(options: Options & { target: string, output?: string, tes
     device: options.device,
     saveStorage: options.saveStorage,
     mode: 'recording',
-    testIdAttributeName,
+    testIdAttributeName: testIdAttributeName ? [testIdAttributeName] : undefined,
     outputFile: outputFile ? path.resolve(outputFile) : undefined,
     handleSIGINT: false,
   });

@@ -769,11 +769,11 @@ export type DebugControllerSetReportStateChangedOptions = {
 export type DebugControllerSetReportStateChangedResult = void;
 export type DebugControllerSetRecorderModeParams = {
   mode: 'inspecting' | 'recording' | 'none',
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   generateAutoExpect?: boolean,
 };
 export type DebugControllerSetRecorderModeOptions = {
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   generateAutoExpect?: boolean,
 };
 export type DebugControllerSetRecorderModeResult = void;
@@ -1028,7 +1028,7 @@ export type BrowserTypeLaunchPersistentContextParams = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   userDataDir: string,
   slowMo?: number,
 };
@@ -1111,7 +1111,7 @@ export type BrowserTypeLaunchPersistentContextOptions = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   slowMo?: number,
 };
 export type BrowserTypeLaunchPersistentContextResult = {
@@ -1262,7 +1262,7 @@ export type BrowserNewContextParams = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   proxy?: {
     server: string,
     bypass?: string,
@@ -1330,7 +1330,7 @@ export type BrowserNewContextOptions = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   proxy?: {
     server: string,
     bypass?: string,
@@ -1401,7 +1401,7 @@ export type BrowserNewContextForReuseParams = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   proxy?: {
     server: string,
     bypass?: string,
@@ -1469,7 +1469,7 @@ export type BrowserNewContextForReuseOptions = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   proxy?: {
     server: string,
     bypass?: string,
@@ -1603,7 +1603,7 @@ export type BrowserContextInitializer = {
     strictSelectors?: boolean,
     serviceWorkers?: 'allow' | 'block',
     selectorEngines?: SelectorEngine[],
-    testIdAttributeName?: string,
+    testIdAttributeName?: string[],
   },
 };
 export interface BrowserContextEventTarget {
@@ -1811,7 +1811,7 @@ export type BrowserContextRegisterSelectorEngineOptions = {
 };
 export type BrowserContextRegisterSelectorEngineResult = void;
 export type BrowserContextSetTestIdAttributeNameParams = {
-  testIdAttributeName: string,
+  testIdAttributeName: string[],
 };
 export type BrowserContextSetTestIdAttributeNameOptions = {
 
@@ -1916,7 +1916,7 @@ export type BrowserContextEnableRecorderParams = {
   mode?: 'inspecting' | 'recording',
   recorderMode?: 'default' | 'api',
   pauseOnNextStatement?: boolean,
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   launchOptions?: any,
   contextOptions?: any,
   device?: string,
@@ -1930,7 +1930,7 @@ export type BrowserContextEnableRecorderOptions = {
   mode?: 'inspecting' | 'recording',
   recorderMode?: 'default' | 'api',
   pauseOnNextStatement?: boolean,
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   launchOptions?: any,
   contextOptions?: any,
   device?: string,
@@ -4589,7 +4589,7 @@ export type ElectronLaunchParams = {
   timezoneId?: string,
   tracesDir?: string,
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
 };
 export type ElectronLaunchOptions = {
   executablePath?: string,
@@ -4625,7 +4625,7 @@ export type ElectronLaunchOptions = {
   timezoneId?: string,
   tracesDir?: string,
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
 };
 export type ElectronLaunchResult = {
   electronApplication: ElectronApplicationChannel,
@@ -5011,7 +5011,7 @@ export type AndroidDeviceLaunchBrowserParams = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   pkg?: string,
   args?: string[],
   proxy?: {
@@ -5077,7 +5077,7 @@ export type AndroidDeviceLaunchBrowserOptions = {
   strictSelectors?: boolean,
   serviceWorkers?: 'allow' | 'block',
   selectorEngines?: SelectorEngine[],
-  testIdAttributeName?: string,
+  testIdAttributeName?: string[],
   pkg?: string,
   args?: string[],
   proxy?: {

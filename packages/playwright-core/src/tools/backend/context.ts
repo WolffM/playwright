@@ -50,7 +50,7 @@ export type ContextConfig = {
   snapshot?: {
     mode?: 'incremental' | 'full' | 'none';
   };
-  testIdAttribute?: string;
+  testIdAttribute?: string | string[];
   timeouts?: {
     action?: number;
     navigation?: number;
