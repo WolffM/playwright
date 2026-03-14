@@ -169,12 +169,7 @@ function transform(template: string, params: TemplateParams, testIdAttributeName
       .replace(/getbyrole\(([^)]+)\)/g, 'internal:role=$1')
       .replace(/getbytext\(([^)]+)\)/g, 'internal:text=$1')
       .replace(/getbylabel\(([^)]+)\)/g, 'internal:label=$1')
-      .replace(/getbytestid\(([^)]+)\)/g, (_, value) => {
-        let selector = `internal:testid=[${firstTestIdAttributeName}=${value}]`;
-        for (const attr of restTestIdAttributeNames)
-          selector += ` >> internal:or=${JSON.stringify(`internal:testid=[${attr}=${value}]`)}`;
-        return selector;
-      })
+      .replace(/getbytestid\(([^)]+)\)/g, `internal:testid=[${firstTestIdAttributeName}=$1]`)
       .replace(/getby(placeholder|alt|title)(?:text)?\(([^)]+)\)/g, 'internal:attr=[$1=$2]')
       .replace(/first(\(\))?/g, 'nth=0')
       .replace(/last(\(\))?/g, 'nth=-1')
@@ -223,6 +218,14 @@ function transform(template: string, params: TemplateParams, testIdAttributeName
             return escapeForAttributeSelector(param.text, suffix === 's');
           return escapeForTextSelector(param.text, suffix === 's');
         });
+    // For testid selectors with multiple attribute names, append OR-chained selectors.
+    if (t.startsWith('internal:testid=') && restTestIdAttributeNames.length) {
+      const valueMatch = t.match(/^internal:testid=\[[^\]]+=(.*)\]$/);
+      if (valueMatch) {
+        for (const attr of restTestIdAttributeNames)
+          t += ` >> internal:or=${JSON.stringify(`internal:testid=[${attr}=${valueMatch[1]}]`)}`;
+      }
+    }
     return t;
   }).join(' >> ');
 }
@@ -246,6 +249,16 @@ export function unsafeLocatorOrSelectorAsSelector(language: Language, locator: s
   const digest = digestForComparison(language, locator);
   if (locators.some(candidate => digestForComparison(language, candidate) === digest))
     return selector;
+  // When multiple testId attributes are configured, asLocators generates OR-chained
+  // locators (e.g. getByTestId('foo').or(...)) that won't match the original input.
+  // Verify using only the first attribute to confirm the locator form is valid, then
+  // return the full multi-attribute selector.
+  if (Array.isArray(testIdAttributeName) && testIdAttributeName.length > 1) {
+    const { selector: firstAttrSelector, preferredQuote: fq } = parseLocator(locator, testIdAttributeName[0]);
+    const firstAttrLocators = asLocators(language, firstAttrSelector, undefined, undefined, fq);
+    if (firstAttrLocators.some(candidate => digestForComparison(language, candidate) === digest))
+      return selector;
+  }
   return '';
 }
 

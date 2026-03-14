@@ -31,6 +31,14 @@ it('getByTestId with custom testId should work', async ({ page, playwright }) =>
   await expect(page.locator('div').getByTestId('Hello')).toHaveText('Hello world');
 });
 
+it('getByTestId with multiple testId attributes should work', async ({ page, playwright }) => {
+  await page.setContent('<div><div data-a="Hello">First</div><div data-b="World">Second</div></div>');
+  playwright.selectors.setTestIdAttribute(['data-a', 'data-b']);
+  await expect(page.getByTestId('Hello')).toHaveText('First');
+  await expect(page.getByTestId('World')).toHaveText('Second');
+  await expect(page.locator('div').getByTestId('Hello')).toHaveText('First');
+});
+
 it('getByTestId should escape id', async ({ page }) => {
   await page.setContent(`<div><div data-testid='He"llo'>Hello world</div></div>`);
   await expect(page.getByTestId('He"llo')).toHaveText('Hello world');
